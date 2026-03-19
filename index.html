@@ -269,6 +269,64 @@
     /* ── INTEREST CARD ICONS ── */
     .card-icon { position: absolute; top: 1.4rem; right: 1.4rem; opacity: 0.3; pointer-events: none; }
 
+    /* ── PROGRESS BAR ── */
+    #progress-bar {
+      position: fixed; top: 63px; left: 0; z-index: 99;
+      height: 2px; background: var(--vermillion);
+      width: 0; transition: width .12s linear; pointer-events: none;
+    }
+
+    /* ── BACK TO TOP ── */
+    #back-to-top {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 98;
+      width: 42px; height: 42px; border-radius: 50%;
+      border: 1px solid var(--sand); background: rgba(247,243,237,.92); backdrop-filter: blur(12px);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity .3s ease, transform .3s ease, background .2s, border-color .2s;
+      box-shadow: 0 4px 18px rgba(0,0,0,.1);
+    }
+    #back-to-top.visible { opacity: 1; transform: translateY(0); }
+    #back-to-top:hover { background: var(--vermillion); border-color: var(--vermillion); }
+    #back-to-top:hover svg { stroke: #fff; }
+    #back-to-top svg { stroke: var(--ink-3); transition: stroke .2s; }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0; transform: translateY(18px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.in-view { opacity: 1; transform: none; }
+
+    /* ── ENHANCED CARD HOVER ── */
+    .interest-card {
+      transition: background .35s ease, transform .35s ease, box-shadow .35s ease;
+    }
+    .interest-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 38px rgba(0,0,0,.08);
+    }
+
+    /* ── NAV ACTIVE LINK ── */
+    .nav-links a.nav-active { color: var(--vermillion); }
+
+    /* ── TIMELINE DATE PILL ── */
+    .tl-date {
+      display: inline-block;
+      font-size: .68rem; letter-spacing: .09em; text-transform: uppercase;
+      color: var(--vermillion);
+      background: rgba(196,67,42,.06);
+      border: 1px solid rgba(196,67,42,.18);
+      padding: .18rem .65rem;
+      margin-bottom: .55rem;
+    }
+
+    /* ── BOTANICAL SECTION DIVIDER ── */
+    .section-divider {
+      display: flex; justify-content: center;
+      margin-top: 4rem; opacity: 0.42; pointer-events: none;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       nav { padding: 0 1.5rem; }
@@ -306,6 +364,8 @@
     </div>
   </div>
 </nav>
+
+<div id="progress-bar" role="progressbar" aria-hidden="true"></div>
 
 <!-- ─── HERO ─── -->
 <section id="hero">
@@ -461,7 +521,7 @@
     <h2 class="s-title"><span data-lang="en">Research Interests</span><span data-lang="zh">研究方向</span></h2>
     <div class="s-rule"></div>
     <div class="interests-grid">
-      <div class="interest-card">
+      <div class="interest-card reveal">
         <div class="interest-num">01</div>
         <!-- Neural network illustration -->
         <svg class="card-icon" width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -483,7 +543,7 @@
         <h3><span data-lang="en">Scientific Machine Learning</span><span data-lang="zh">科学机器学习</span></h3>
         <p><span data-lang="en">Neural operator learning for PDEs, data-driven nonlocal constitutive models, deep learning methods for differential equations, theory of physics-guided learning.</span><span data-lang="zh">面向偏微分方程的神经算子学习、数据驱动的非局部本构模型、微分方程深度学习方法，以及物理引导学习理论。</span></p>
       </div>
-      <div class="interest-card">
+      <div class="interest-card reveal">
         <div class="interest-num">02</div>
         <!-- Coordinate axes + wave illustration -->
         <svg class="card-icon" width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -497,7 +557,7 @@
         <h3><span data-lang="en">Numerical Methods for PDEs</span><span data-lang="zh">偏微分方程数值方法</span></h3>
         <p><span data-lang="en">High-order numerical schemes, stability and convergence analysis, absorbing boundary conditions, efficient algorithms for partial differential equations on unbounded domains.</span><span data-lang="zh">高阶数值格式、稳定性与收敛性分析、吸收边界条件，以及无界区域偏微分方程的高效算法。</span></p>
       </div>
-      <div class="interest-card">
+      <div class="interest-card reveal">
         <div class="interest-num">03</div>
         <!-- Particle interaction / nonlocal range illustration -->
         <svg class="card-icon" width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -519,6 +579,18 @@
         <h3><span data-lang="en">Nonlocal Models</span><span data-lang="zh">非局部模型</span></h3>
         <p><span data-lang="en">Peridynamic models and neural operators, nonlocal wave equations, fractional differential equations, material modeling with nonlocal interactions.</span><span data-lang="zh">近场动力学模型与神经算子、非局部波动方程、分数阶微分方程，以及具有非局部相互作用的材料建模。</span></p>
       </div>
+    </div>
+    <!-- Botanical divider -->
+    <div class="section-divider">
+      <svg width="110" height="22" viewBox="0 0 110 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line x1="4" y1="11" x2="40" y2="11" stroke="#C4B9A8" stroke-width="0.8"/>
+        <circle cx="43" cy="11" r="2.2" fill="rgba(196,67,42,0.28)"/>
+        <line x1="55" y1="21" x2="55" y2="13" stroke="#6B7F5A" stroke-width="1.3" stroke-linecap="round"/>
+        <path d="M 50,13 C 49,8 51,3 55,3 C 59,3 61,8 60,13 C 58,15.5 52,15.5 50,13 Z" stroke="#C4432A" stroke-width="1.2" fill="rgba(196,67,42,0.16)"/>
+        <line x1="55" y1="12" x2="55" y2="3.5" stroke="#C4432A" stroke-width="0.7" opacity="0.5"/>
+        <circle cx="67" cy="11" r="2.2" fill="rgba(196,67,42,0.28)"/>
+        <line x1="70" y1="11" x2="106" y2="11" stroke="#C4B9A8" stroke-width="0.8"/>
+      </svg>
     </div>
   </section>
 
@@ -550,17 +622,29 @@
       </svg>
     </div>
     <div class="timeline">
-      <div class="tl-item">
+      <div class="tl-item reveal">
         <div class="tl-date"><span data-lang="en">Sep 2017 - Jun 2022</span><span data-lang="zh">2017年9月 - 2022年6月</span></div>
         <div class="tl-title"><span data-lang="en">Ph.D., Computational Mathematics</span><span data-lang="zh">博士，计算数学</span></div>
         <div class="tl-sub"><span data-lang="en">Beijing Computational Science Research Center, Beijing, China</span><span data-lang="zh">北京计算科学研究中心，北京</span></div>
         <div class="tl-desc"><span data-lang="en">Thesis: Design of DtN-type absorbing boundary conditions for a class of nonlocal models</span><span data-lang="zh">博士论文：一类非局部模型的 DtN 型吸收边界条件设计</span></div>
       </div>
-      <div class="tl-item">
+      <div class="tl-item reveal">
         <div class="tl-date"><span data-lang="en">Sep 2013 - Jun 2017</span><span data-lang="zh">2013年9月 - 2017年6月</span></div>
         <div class="tl-title"><span data-lang="en">B.S., Computational Mathematics</span><span data-lang="zh">学士，计算数学</span></div>
         <div class="tl-sub"><span data-lang="en">Jilin University, Changchun, China</span><span data-lang="zh">吉林大学，长春</span></div>
       </div>
+    </div>
+    <!-- Botanical divider -->
+    <div class="section-divider">
+      <svg width="110" height="22" viewBox="0 0 110 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line x1="4" y1="11" x2="40" y2="11" stroke="#C4B9A8" stroke-width="0.8"/>
+        <circle cx="43" cy="11" r="2.2" fill="rgba(196,67,42,0.28)"/>
+        <line x1="55" y1="21" x2="55" y2="13" stroke="#6B7F5A" stroke-width="1.3" stroke-linecap="round"/>
+        <path d="M 50,13 C 49,8 51,3 55,3 C 59,3 61,8 60,13 C 58,15.5 52,15.5 50,13 Z" stroke="#C4432A" stroke-width="1.2" fill="rgba(196,67,42,0.16)"/>
+        <line x1="55" y1="12" x2="55" y2="3.5" stroke="#C4432A" stroke-width="0.7" opacity="0.5"/>
+        <circle cx="67" cy="11" r="2.2" fill="rgba(196,67,42,0.28)"/>
+        <line x1="70" y1="11" x2="106" y2="11" stroke="#C4B9A8" stroke-width="0.8"/>
+      </svg>
     </div>
   </section>
 
@@ -595,21 +679,33 @@
       </svg>
     </div>
     <div class="timeline">
-      <div class="tl-item">
+      <div class="tl-item reveal">
         <div class="tl-date"><span data-lang="en">2025 - Present</span><span data-lang="zh">2025 - 至今</span></div>
         <div class="tl-title"><span data-lang="en">Associate Professor</span><span data-lang="zh">副教授</span></div>
         <div class="tl-sub"><span data-lang="en">School of Mathematics and Statistics, Huazhong University of Science and Technology (HUST), Wuhan, China</span><span data-lang="zh">华中科技大学数学与统计学院，武汉</span></div>
       </div>
-      <div class="tl-item">
+      <div class="tl-item reveal">
         <div class="tl-date"><span data-lang="en">Aug 2024 - Jul 2025</span><span data-lang="zh">2024年8月 - 2025年7月</span></div>
         <div class="tl-title"><span data-lang="en">Postdoctoral Researcher</span><span data-lang="zh">博士后研究员</span></div>
         <div class="tl-sub"><span data-lang="en">Department of Mathematics, Lehigh University, USA</span><span data-lang="zh">理海大学数学系， 美国</span></div>
       </div>
-      <div class="tl-item">
+      <div class="tl-item reveal">
         <div class="tl-date"><span data-lang="en">Jul 2022 - Jul 2024</span><span data-lang="zh">2022年7月 - 2024年7月</span></div>
         <div class="tl-title"><span data-lang="en">Postdoctoral Fellow</span><span data-lang="zh">博士后</span></div>
         <div class="tl-sub"><span data-lang="en">Zhejiang Lab, Hangzhou, China</span><span data-lang="zh">之江实验室，杭州</span></div>
       </div>
+    </div>
+    <!-- Botanical divider -->
+    <div class="section-divider">
+      <svg width="110" height="22" viewBox="0 0 110 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line x1="4" y1="11" x2="40" y2="11" stroke="#C4B9A8" stroke-width="0.8"/>
+        <circle cx="43" cy="11" r="2.2" fill="rgba(196,67,42,0.28)"/>
+        <line x1="55" y1="21" x2="55" y2="13" stroke="#6B7F5A" stroke-width="1.3" stroke-linecap="round"/>
+        <path d="M 50,13 C 49,8 51,3 55,3 C 59,3 61,8 60,13 C 58,15.5 52,15.5 50,13 Z" stroke="#C4432A" stroke-width="1.2" fill="rgba(196,67,42,0.16)"/>
+        <line x1="55" y1="12" x2="55" y2="3.5" stroke="#C4432A" stroke-width="0.7" opacity="0.5"/>
+        <circle cx="67" cy="11" r="2.2" fill="rgba(196,67,42,0.28)"/>
+        <line x1="70" y1="11" x2="106" y2="11" stroke="#C4B9A8" stroke-width="0.8"/>
+      </svg>
     </div>
   </section>
 
@@ -698,6 +794,67 @@
 <script>
   const LANG_STORAGE_KEY = 'site-language';
 
+  /* ── SCROLL REVEAL ── */
+  let _revealObs = null;
+  function initScrollReveal() {
+    _revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const siblings = [...(el.parentElement || document.body).querySelectorAll('.reveal:not(.in-view)')];
+        const idx = siblings.indexOf(el);
+        el.style.transitionDelay = Math.min(idx, 7) * 0.07 + 's';
+        el.classList.add('in-view');
+        _revealObs.unobserve(el);
+      });
+    }, { threshold: 0.08, rootMargin: '-20px 0px 0px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => _revealObs.observe(el));
+  }
+  function observeNewReveal() {
+    if (!_revealObs) return;
+    document.querySelectorAll('.reveal:not(.in-view)').forEach(el => _revealObs.observe(el));
+  }
+
+  /* ── PROGRESS BAR ── */
+  function initProgressBar() {
+    const bar = document.getElementById('progress-bar');
+    if (!bar) return;
+    function update() {
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (docH > 0 ? window.scrollY / docH * 100 : 0) + '%';
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  }
+
+  /* ── BACK TO TOP ── */
+  function initBackToTop() {
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    window.addEventListener('scroll', () => {
+      btn.classList.toggle('visible', window.scrollY > 600);
+    }, { passive: true });
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  }
+
+  /* ── ACTIVE NAV ── */
+  function initActiveNav() {
+    const sections = document.querySelectorAll('main section[id]');
+    const links = document.querySelectorAll('.nav-links a[href^="#"]');
+    if (!sections.length || !links.length) return;
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          links.forEach(a => {
+            a.classList.toggle('nav-active', a.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { threshold: 0.3, rootMargin: '-64px 0px -30% 0px' });
+    sections.forEach(s => obs.observe(s));
+  }
+
+  /* ── LANGUAGE ── */
   function setLanguage(lang) {
     const nextLang = lang === 'zh' ? 'zh' : 'en';
     document.documentElement.lang = nextLang === 'zh' ? 'zh-CN' : 'en';
@@ -713,6 +870,7 @@
     window.localStorage.setItem(LANG_STORAGE_KEY, nextLang);
     renderPublications();
     renderTalks();
+    requestAnimationFrame(observeNewReveal);
   }
 
   function initLanguageToggle() {
@@ -724,6 +882,7 @@
     });
   }
 
+  /* ── PUBLICATIONS ── */
   function renderPublications() {
     const list = document.getElementById('pub-list');
     if (!list || typeof PUBLICATIONS === 'undefined') return;
@@ -744,7 +903,7 @@
           : `<span class="tag tag-journal">${lang === 'zh' ? '期刊' : 'Journal'}</span>`;
 
       return `
-        <div class="pub-item">
+        <div class="pub-item reveal">
           <div class="pub-index">${num}</div>
           <div>
             <div class="pub-title">${p.title}${doiLink}</div>
@@ -761,6 +920,7 @@
     document.querySelectorAll('#pub-count-hero').forEach(el => { el.textContent = PUBLICATIONS.length; });
   }
 
+  /* ── TALKS ── */
   function renderTalks() {
     const list = document.getElementById('talk-list');
     if (!list || typeof TALKS === 'undefined') return;
@@ -771,7 +931,7 @@
       if (t.type === 'invited') typeTag = `<span class="talk-type type-invited">${lang === 'zh' ? '邀请报告' : 'Invited Talk'}</span>`;
       else if (t.type === 'poster') typeTag = `<span class="talk-type type-poster">${lang === 'zh' ? '海报展示' : 'Poster'}</span>`;
       return `
-        <div class="talk-item">
+        <div class="talk-item reveal">
           <div class="talk-year">${t.year}</div>
           <div>
             <div class="talk-conf">${t.conference}</div>
@@ -782,8 +942,20 @@
     }).join('');
   }
 
+  /* ── INIT ── */
+  initScrollReveal();
+  initProgressBar();
+  initBackToTop();
+  initActiveNav();
   initLanguageToggle();
 </script>
+
+<!-- ─── BACK TO TOP ─── -->
+<button id="back-to-top" aria-label="Back to top" title="Back to top">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 15l-6-6-6 6"/>
+  </svg>
+</button>
 
 <!-- ─── GOATCOUNTER（访客统计，部署后取消注释并替换站点名）────────
 <script data-goatcounter="https://YOUR-SITE-NAME.goatcounter.com/count"
