@@ -793,6 +793,8 @@
 <!-- ─── RENDER ENGINE ─── -->
 <script>
   const LANG_STORAGE_KEY = 'site-language';
+  const GA_MEASUREMENT_ID = 'G-WQ4FS5DNS0';
+  let gaInitialized = false;
 
   /* ── SCROLL REVEAL ── */
   let _revealObs = null;
@@ -852,6 +854,22 @@
       });
     }, { threshold: 0.3, rootMargin: '-64px 0px -30% 0px' });
     sections.forEach(s => obs.observe(s));
+  }
+
+  /* ── ANALYTICS ── */
+  function loadGoogleAnalytics() {
+    if (gaInitialized) return;
+    gaInitialized = true;
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag(){ window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', GA_MEASUREMENT_ID);
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+    document.head.appendChild(script);
   }
 
   /* ── LANGUAGE ── */
@@ -948,6 +966,7 @@
   initBackToTop();
   initActiveNav();
   initLanguageToggle();
+  loadGoogleAnalytics();
 </script>
 
 <!-- ─── BACK TO TOP ─── -->
@@ -957,10 +976,7 @@
   </svg>
 </button>
 
-<!-- ─── GOATCOUNTER（访客统计，部署后取消注释并替换站点名）────────
-<script data-goatcounter="https://YOUR-SITE-NAME.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
-─────────────────────────────────────────────────────────────── -->
+<!-- GoatCounter snippet removed in favor of GA4 -->
 
 </body>
 </html>
