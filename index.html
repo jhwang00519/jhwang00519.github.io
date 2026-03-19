@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jihong Wang — Mathematician</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Noto+Serif+SC:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    /* ===== 风格速查 =============================================
+       改颜色：修改 :root 中的变量
+       --cream        页面底色（温暖奶油白）
+       --ink          正文深色
+       --vermillion   主题朱红色
+       --gold         金色点缀
+       改字体：修改 Google Fonts 链接 + 对应 font-family 值
+    ============================================================= */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:      #F7F3ED;
+      --cream-2:    #FEFCF9;
+      --cream-3:    #EDE7DC;
+      --sand:       #E0D8CD;
+      --stone:      #C4B9A8;
+      --ink:        #1A1612;
+      --ink-2:      #3D362E;
+      --ink-3:      #6B6158;
+      --vermillion: #C4432A;
+      --verm-soft:  #D4654F;
+      --gold:       #B8963E;
+      --gold-lt:    #F5EDD8;
+      --border:     #E0D8CD;
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-zh:      'Noto Serif SC', 'Songti SC', serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--cream); color: var(--ink); line-height: 1.75; font-weight: 300; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(247,243,237,.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--sand);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 64px;
+    }
+    .nav-logo { font-family: var(--font-display); font-size: 1.2rem; font-weight: 400; color: var(--ink); text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: .78rem; font-weight: 400; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; color: var(--ink-3); transition: color .2s; }
+    .nav-links a:hover { color: var(--vermillion); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 8rem 3rem 5rem;
+      position: relative; overflow: hidden;
+      background: var(--cream-2);
+    }
+    /* Botanical tulip illustration */
+    .hero-bg-tulip {
+      position: absolute; right: 0; top: 0;
+      height: 100%; width: 52%;
+      pointer-events: none;
+    }
+    /* Gradient overlay: strong cream on left (text area), fades right */
+    #hero::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background:
+        linear-gradient(to right,
+          rgba(254,252,249,.97) 0%,
+          rgba(254,252,249,.88) 35%,
+          rgba(254,252,249,.55) 60%,
+          rgba(254,252,249,.15) 100%),
+        linear-gradient(to bottom,
+          rgba(254,252,249,.3) 0%,
+          transparent 30%,
+          transparent 70%,
+          rgba(254,252,249,.3) 100%);
+    }
+    .hero-inner {
+      position: relative; z-index: 1;
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 280px; gap: 5rem; align-items: center;
+    }
+    .hero-eyebrow { font-size: .73rem; letter-spacing: .2em; text-transform: uppercase; color: var(--vermillion); font-weight: 400; margin-bottom: 1.5rem; }
+    h1.hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 6.5vw, 5.5rem);
+      font-weight: 300; line-height: 1.08;
+      color: var(--ink); letter-spacing: -.02em;
+    }
+    /* Chinese name uses Noto Serif SC */
+    h1.hero-name .zh {
+      font-family: var(--font-zh);
+      font-size: .52em; font-weight: 300;
+      color: var(--ink-3); letter-spacing: .15em;
+      display: block; margin-top: .35em;
+    }
+    .hero-divider { width: 48px; height: 1px; background: var(--vermillion); margin: 2rem 0; }
+    .hero-bio { font-size: 1rem; color: var(--ink-2); line-height: 1.9; max-width: 520px; font-weight: 300; }
+    .hero-bio strong { font-weight: 500; color: var(--ink); }
+    .hero-meta { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 1rem; }
+    .meta-pill {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .78rem; letter-spacing: .04em;
+      color: var(--ink-3); text-decoration: none;
+      border-bottom: 1px solid var(--stone); padding-bottom: .15rem;
+      transition: color .2s, border-color .2s;
+    }
+    .meta-pill:hover { color: var(--vermillion); border-color: var(--vermillion); }
+
+    /* Hero right: photo only */
+    .hero-right { display: flex; justify-content: center; align-items: flex-start; padding-top: 1rem; }
+    .hero-photo {
+      width: 240px; height: 240px; border-radius: 50%;
+      border: 1px solid var(--sand);
+      overflow: hidden; background: var(--cream-3);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 40px rgba(0,0,0,.1), 0 0 0 8px rgba(247,243,237,.8);
+    }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 18%; }
+    .hero-photo .photo-placeholder {
+      display: flex; flex-direction: column; align-items: center; gap: .5rem;
+      color: var(--stone); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase;
+    }
+
+    /* ── SECTION SCAFFOLD ── */
+    main { max-width: 1100px; margin: 0 auto; padding: 5rem 3rem; }
+    section { margin-bottom: 7rem; }
+    .s-label { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--vermillion); margin-bottom: 1rem; font-weight: 400; }
+    h2.s-title { font-family: var(--font-display); font-size: clamp(1.9rem, 3.5vw, 2.8rem); font-weight: 300; color: var(--ink); line-height: 1.15; letter-spacing: -.01em; }
+    .s-rule { width: 40px; height: 1px; background: var(--stone); margin: 1.5rem 0 3rem; }
+
+    /* ── RESEARCH INTERESTS ── */
+    .interests-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--sand); border: 1px solid var(--sand); }
+    .interest-card {
+      background: var(--cream-2); padding: 2.5rem 2rem;
+      transition: background .2s; position: relative;
+    }
+    .interest-card::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+      background: var(--vermillion); transform: scaleY(0); transform-origin: bottom; transition: transform .3s ease;
+    }
+    .interest-card:hover { background: var(--gold-lt); }
+    .interest-card:hover::before { transform: scaleY(1); }
+    .interest-num { font-family: var(--font-display); font-size: .85rem; color: var(--stone); margin-bottom: 1rem; font-style: italic; }
+    .interest-card h3 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 400; color: var(--ink); margin-bottom: .75rem; line-height: 1.3; }
+    .interest-card p { font-size: .87rem; color: var(--ink-3); line-height: 1.85; }
+
+    /* ── TIMELINE ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+    .col-label { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 2rem; font-weight: 400; }
+    .timeline { display: flex; flex-direction: column; }
+    .tl-item { padding: 1.5rem 0 1.5rem 2rem; border-left: 1px solid var(--sand); position: relative; transition: border-color .2s; }
+    .tl-item:hover { border-color: var(--vermillion); }
+    .tl-item::before { content: ''; position: absolute; left: -4px; top: 1.9rem; width: 7px; height: 7px; border-radius: 50%; background: var(--sand); border: 1px solid var(--stone); transition: background .2s, border-color .2s; }
+    .tl-item:first-child::before { background: var(--vermillion); border-color: var(--vermillion); }
+    .tl-item:hover::before { background: var(--vermillion); border-color: var(--vermillion); }
+    .tl-date { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--vermillion); margin-bottom: .4rem; }
+    .tl-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; color: var(--ink); }
+    .tl-sub { font-size: .85rem; color: var(--ink-3); margin-top: .15rem; }
+    .tl-desc { margin-top: .75rem; font-size: .83rem; color: var(--ink-3); font-style: italic; line-height: 1.7; padding-left: .75rem; border-left: 2px solid var(--sand); }
+
+    /* ── GRANTS ── */
+    .grant-list { display: flex; flex-direction: column; }
+    .grant-item { padding: 1.75rem 0; border-bottom: 1px solid var(--border); display: flex; gap: 1.5rem; align-items: flex-start; }
+    .grant-mark { width: 32px; height: 32px; border: 1px solid var(--sand); display: flex; align-items: center; justify-content: center; font-size: .8rem; flex-shrink: 0; background: var(--cream-2); color: var(--vermillion); font-family: var(--font-display); font-style: italic; }
+    .grant-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; color: var(--ink); line-height: 1.35; }
+    .grant-detail { font-size: .83rem; color: var(--ink-3); margin-top: .25rem; }
+
+    /* ── PUBLICATIONS ── */
+    .pub-list { display: flex; flex-direction: column; }
+    .pub-item {
+      display: grid; grid-template-columns: 48px 1fr;
+      gap: 1.5rem; align-items: start;
+      padding: 2rem 0; border-bottom: 1px solid var(--border);
+      position: relative; cursor: default; transition: background .2s;
+    }
+    .pub-item::before {
+      content: ''; position: absolute;
+      left: -3rem; top: 0; bottom: 0; width: 2px;
+      background: var(--vermillion); transform: scaleY(0); transform-origin: bottom; transition: transform .35s ease;
+    }
+    .pub-item:hover { background: var(--gold-lt); margin: 0 -3rem; padding: 2rem 3rem; }
+    .pub-item:hover::before { transform: scaleY(1); }
+    .pub-index { font-family: var(--font-display); font-size: 1rem; font-weight: 300; font-style: italic; color: var(--stone); padding-top: .2rem; }
+    .pub-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 400; color: var(--ink); line-height: 1.4; margin-bottom: .5rem; }
+    .pub-authors { font-size: .83rem; color: var(--ink-3); margin-bottom: .5rem; line-height: 1.6; }
+    .pub-self { color: var(--vermillion); font-weight: 500; }
+    .pub-meta { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
+    .pub-venue { font-size: .82rem; font-style: italic; color: var(--ink-2); }
+    .tag { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 400; padding: .2rem .65rem; border: 1px solid; }
+    .tag-journal    { border-color: #6B7F5A; color: #4a5c3a; }
+    .tag-conference { border-color: #2B3A52; color: #2B3A52; }
+    .tag-preprint   { border-color: var(--gold); color: #8a6e2a; }
+    .tag-year       { border-color: var(--stone); color: var(--ink-3); }
+    .hero-bio em    { color: var(--vermillion); font-style: italic; font-size: .95em; }
+    .pub-doi { font-size: .78rem; color: var(--vermillion); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s; }
+    .pub-doi:hover { border-color: var(--vermillion); }
+
+    /* ── TALKS ── */
+    .talk-list { display: flex; flex-direction: column; }
+    .talk-item {
+      display: flex; gap: 2rem; align-items: flex-start;
+      padding: 1.5rem 0; border-bottom: 1px solid var(--border);
+      position: relative; transition: background .2s;
+    }
+    .talk-item::before {
+      content: ''; position: absolute; left: -3rem; top: 0; bottom: 0; width: 2px;
+      background: var(--vermillion); transform: scaleY(0); transform-origin: bottom; transition: transform .3s ease;
+    }
+    .talk-item:hover { background: var(--gold-lt); margin: 0 -3rem; padding: 1.5rem 3rem; }
+    .talk-item:hover::before { transform: scaleY(1); }
+    .talk-year { font-family: var(--font-display); font-size: 1.05rem; font-style: italic; font-weight: 300; color: var(--stone); min-width: 48px; flex-shrink: 0; padding-top: .1rem; }
+    .talk-conf { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; color: var(--ink); line-height: 1.35; }
+    .talk-loc { font-size: .83rem; color: var(--ink-3); margin-top: .2rem; }
+    .talk-type { display: inline-block; margin-top: .5rem; font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; padding: .2rem .65rem; border: 1px solid; font-weight: 400; }
+    .type-invited { border-color: #5b21b6; color: #5b21b6; }
+    .type-poster  { border-color: var(--verm-soft); color: var(--verm-soft); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--sand); background: var(--cream-2);
+      padding: 3rem; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-name { font-family: var(--font-display); font-size: 1.5rem; font-weight: 300; color: var(--ink); }
+    .footer-meta { font-size: .8rem; color: var(--ink-3); line-height: 1.8; }
+    .footer-meta a { color: var(--vermillion); text-decoration: none; }
+    .footer-meta a:hover { text-decoration: underline; }
+
+    /* ── FADE-IN ── */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+    .fi  { animation: fadeUp .75s ease both; }
+    .fi1 { animation-delay: .1s; }
+    .fi2 { animation-delay: .28s; }
+    .fi3 { animation-delay: .45s; }
+    .fi4 { animation-delay: .62s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-right { justify-content: flex-start; }
+      main { padding: 4rem 1.5rem; }
+      .two-col { grid-template-columns: 1fr; gap: 3rem; }
+      .pub-item:hover, .talk-item:hover { margin:0; padding-left:0; padding-right:0; }
+      .pub-item::before, .talk-item::before { left:0; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      h1.hero-name { font-size: 2.8rem; }
+      footer { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a class="nav-logo" href="#hero">Jihong Wang</a>
+  <ul class="nav-links">
+    <li><a href="#research">Research</a></li>
+    <li><a href="#background">Background</a></li>
+    <li><a href="#grants">Grants</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#talks">Talks</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+
+  <!-- Botanical tulip illustration (semi-transparent) -->
+  <svg class="hero-bg-tulip" viewBox="0 0 460 720" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMaxYMax meet">
+    <g opacity="0.52">
+
+    <!-- ── Tulip C · bud (left, smallest) ── -->
+    <path d="M 95 720 C 93 658 98 595 91 538 C 85 482 90 443 94 408"
+          stroke="#6B7F5A" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <!-- Leaf C1 – arching left -->
+    <path d="M 92 578 C 60 555 34 526 18 496 L 20 492 C 37 520 63 547 94 568 Z"
+          stroke="#6B7F5A" stroke-width="2" fill="rgba(107,127,90,0.28)"
+          stroke-linejoin="round" stroke-linecap="round"/>
+    <!-- Leaf C2 – arching right -->
+    <path d="M 93 488 C 122 467 148 441 158 413 L 155 410 C 144 437 120 462 92 484 Z"
+          stroke="#6B7F5A" stroke-width="2" fill="rgba(107,127,90,0.28)"
+          stroke-linejoin="round" stroke-linecap="round"/>
+    <!-- Flower C – tight bud -->
+    <path d="M 82 415 C 70 399 66 376 70 354 C 74 336 83 324 92 322
+             C 98 322 106 334 110 352 C 114 374 110 397 98 414
+             C 93 419 85 420 82 415 Z"
+          stroke="#9B6040" stroke-width="2" fill="rgba(155,96,64,0.26)"
+          stroke-linejoin="round" stroke-linecap="round"/>
+    <!-- Petal line C -->
+    <path d="M 94 415 C 92 388 91 358 92 332" stroke="#9B6040" stroke-width="1.2" fill="none" opacity="0.6"/>
+    <!-- Sepal C -->
+    <path d="M 82 415 C 85 422 90 426 94 427 C 94 418 94 410 94 408"
+          stroke="#6B7F5A" stroke-width="2.5" fill="rgba(107,127,90,0.38)" stroke-linecap="round"/>
+    <path d="M 98 414 C 100 420 98 426 94 427"
+          stroke="#6B7F5A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+    <!-- ── Tulip A · main (center, tallest) ── -->
+    <path d="M 206 720 C 204 642 210 562 203 480 C 196 400 200 324 204 248"
+          stroke="#6B7F5A" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <!-- Leaf A1 – lower, arching left -->
+    <path d="M 203 540 C 166 514 132 482 112 448 L 115 444 C 136 476 170 506 205 532 Z"
+          stroke="#6B7F5A" stroke-width="2.8" fill="rgba(107,127,90,0.28)"
+          stroke-linejoin="round" stroke-linecap="round"/>
+    <!-- Midrib A1 -->
+    <path d="M 203 540 C 172 516 144 488 126 456" stroke="#6B7F5A" stroke-width="1.2" fill="none" opacity="0.50"/>
+    <!-- Leaf A2 – upper, arching right -->
+    <path d="M 203 400 C 244 376 282 346 300 312 L 297 309 C 278 342 242 370 203 396 Z"
+          stroke="#6B7F5A" stroke-width="2.8" fill="rgba(107,127,90,0.28)"
+          stroke-linejoin="round" stroke-linecap="round"/>
+    <!-- Midrib A2 -->
+    <path d="M 203 400 C 238 378 272 350 292 316" stroke="#6B7F5A" stroke-width="1.2" fill="none" opacity="0.50"/>
+    <!-- Flower A silhouette -->
+    <path d="M 190 258 C 175 240 165 210 170 175 C 174 146 186 128 196 124
+             C 202 121 210 120 218 121 C 226 122 234 125 240 130
+             C 250 138 260 158 264 188 C 268 220 258 252 244 264
+             C 234 272 220 275 210 272 Z"
+          stroke="#C4432A" stroke-width="2.2" fill="rgba(196,67,42,0.24)"
+          stroke-linejoin="round" stroke-linecap="round"/>
+    <!-- Petal separation lines A -->
+    <path d="M 204 268 C 200 234 198 190 200 148" stroke="#C4432A" stroke-width="1.3" fill="none" opacity="0.60"/>
+    <path d="M 212 272 C 212 238 213 193 212 150" stroke="#C4432A" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <path d="M 196 260 C 188 225 184 184 186 148" stroke="#C4432A" stroke-width="1"   fill="none" opacity="0.42"/>
+    <path d="M 222 270 C 226 236 228 192 226 150" stroke="#C4432A" stroke-width="1"   fill="none" opacity="0.42"/>
+    <!-- Sepal A -->
+    <path d="M 190 258 C 193 266 198 271 204 272 C 204 262 203 252 204 248"
+          stroke="#6B7F5A" stroke-width="2.8" fill="rgba(107,127,90,0.40)" stroke-linecap="round"/>
+    <path d="M 244 264 C 242 270 238 273 234 274 C 228 274 218 273 212 272"
+          stroke="#6B7F5A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+
+    <!-- ── Tulip B · medium (right) ── -->
+    <path d="M 348 720 C 350 652 344 582 351 514 C 358 448 353 394 350 344"
+          stroke="#6B7F5A" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Leaf B1 – arching left -->
+    <path d="M 350 590 C 316 566 286 536 268 504 L 271 500 C 290 530 320 558 352 582 Z"
+          stroke="#6B7F5A" stroke-width="2.5" fill="rgba(107,127,90,0.28)"
+          stroke-linejoin="round" stroke-linecap="round"/>
+    <!-- Midrib B1 -->
+    <path d="M 350 590 C 320 568 292 540 276 508" stroke="#6B7F5A" stroke-width="1.2" fill="none" opacity="0.50"/>
+    <!-- Leaf B2 – arching right -->
+    <path d="M 351 466 C 384 444 414 416 430 386 L 427 383 C 410 412 382 440 350 462 Z"
+          stroke="#6B7F5A" stroke-width="2.5" fill="rgba(107,127,90,0.28)"
+          stroke-linejoin="round" stroke-linecap="round"/>
+    <!-- Flower B silhouette -->
+    <path d="M 337 352 C 323 335 315 306 319 274 C 323 248 334 232 344 228
+             C 350 225 357 225 364 228 C 374 233 384 250 388 276
+             C 392 308 384 338 370 352 C 362 360 348 362 340 358 Z"
+          stroke="#C4432A" stroke-width="2" fill="rgba(196,67,42,0.22)"
+          stroke-linejoin="round" stroke-linecap="round"/>
+    <!-- Petal lines B -->
+    <path d="M 350 355 C 347 320 345 278 347 240" stroke="#C4432A" stroke-width="1.3" fill="none" opacity="0.58"/>
+    <path d="M 357 358 C 358 324 360 280 358 242" stroke="#C4432A" stroke-width="1.1" fill="none" opacity="0.45"/>
+    <path d="M 340 350 C 334 314 330 273 332 238" stroke="#C4432A" stroke-width="1"   fill="none" opacity="0.40"/>
+    <!-- Sepal B -->
+    <path d="M 337 352 C 340 360 345 364 350 365 C 350 356 350 347 350 344"
+          stroke="#6B7F5A" stroke-width="2.5" fill="rgba(107,127,90,0.40)" stroke-linecap="round"/>
+    <path d="M 370 352 C 368 358 364 362 360 364 C 356 364 352 364 350 365"
+          stroke="#6B7F5A" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+
+    </g>
+  </svg>
+
+  <div class="hero-inner">
+    <div>
+      <p class="hero-eyebrow fi fi1">Associate Professor · Mathematics</p>
+
+      <h1 class="hero-name fi fi2">
+        Jihong Wang
+        <span class="zh">王季红</span>
+      </h1>
+
+      <div class="hero-divider fi fi3"></div>
+
+      <p class="hero-bio fi fi3">
+        I work at the intersection of <strong>scientific machine learning</strong> and
+        <strong>numerical computation</strong> — building data-driven nonlocal constitutive models, and developing
+        physics-guided computational methods.<br><br>
+        Associate Professor, <strong>School of Mathematics and Statistics,
+        Huazhong University of Science and Technology (HUST)</strong>, Wuhan, China.<br><br>
+        <em>Students interested in my research are welcome to reach out.</em>
+      </p>
+
+      <div class="hero-meta fi fi4">
+        <a class="meta-pill" href="mailto:jhwang00519@hust.edu.cn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          jhwang00519@gmail.com
+        </a>
+        <a class="meta-pill" href="http://faculty.hust.edu.cn/WANGJIHONG" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          HUST Faculty Page
+        </a>
+        <a class="meta-pill" href="#publications">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <span id="pub-count-hero">13</span> Publications
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-right fi fi3">
+      <div class="hero-photo">
+        <img src="photo.png" alt="Jihong Wang">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MAIN ─── -->
+<main>
+
+  <!-- ─── RESEARCH INTERESTS ─── -->
+  <section id="research">
+    <p class="s-label">Focus Areas</p>
+    <h2 class="s-title">Research Interests</h2>
+    <div class="s-rule"></div>
+    <div class="interests-grid">
+      <div class="interest-card">
+        <div class="interest-num">01</div>
+        <h3>Scientific Machine Learning</h3>
+        <p>Neural operator learning for PDEs, data-driven nonlocal constitutive models, deep learning methods for differential equations, theory of physics-guided learning.</p>
+      </div>
+      <div class="interest-card">
+        <div class="interest-num">02</div>
+        <h3>Numerical Methods for PDEs</h3>
+        <p>High-order numerical schemes, stability and convergence analysis, absorbing boundary conditions, efficient algorithms for partial differential equations on unbounded domains.</p>
+      </div>
+      <div class="interest-card">
+        <div class="interest-num">03</div>
+        <h3>Nonlocal Models</h3>
+        <p>Peridynamic models and neural operators, nonlocal wave equations, fractional differential equations, material modeling with nonlocal interactions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── EDUCATION & EMPLOYMENT ─── -->
+  <section id="background">
+    <p class="s-label">Career</p>
+    <h2 class="s-title">Education &amp; Employment</h2>
+    <div class="s-rule"></div>
+    <div class="two-col">
+      <div>
+        <p class="col-label">Positions Held</p>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-date">2025 — Present</div>
+            <div class="tl-title">Associate Professor</div>
+            <div class="tl-sub">School of Mathematics and Statistics, Huazhong University of Science and Technology (HUST), China</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">Aug 2024 — Jul 2025</div>
+            <div class="tl-title">Postdoctoral Researcher</div>
+            <div class="tl-sub">Department of Mathematics, Lehigh University, USA</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">Jul 2022 — Jul 2024</div>
+            <div class="tl-title">Postdoctoral Fellow</div>
+            <div class="tl-sub">Zhejiang Lab, China</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="col-label">Degrees</p>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-date">Sep 2017 — Jun 2022</div>
+            <div class="tl-title">Ph.D., Computational Mathematics</div>
+            <div class="tl-sub">Beijing Computational Science Research Center, China</div>
+            <div class="tl-desc">Thesis: Design of DtN-type absorbing boundary conditions for a class of nonlocal models</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">Sep 2013 — Jun 2017</div>
+            <div class="tl-title">B.S., Computational Mathematics</div>
+            <div class="tl-sub">Jilin University, China</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── RESEARCH GRANTS ─── -->
+  <section id="grants">
+    <p class="s-label">Funding</p>
+    <h2 class="s-title">Research Grants</h2>
+    <div class="s-rule"></div>
+    <div class="grant-list">
+      <div class="grant-item">
+        <div class="grant-mark">I</div>
+        <div>
+          <div class="grant-title">Hubei Provincial Natural Science Foundation — Youth Program</div>
+          <div class="grant-detail">Principal Investigator</div>
+        </div>
+      </div>
+      <div class="grant-item">
+        <div class="grant-mark">II</div>
+        <div>
+          <div class="grant-title">China Postdoctoral Science Foundation</div>
+          <div class="grant-detail">Principal Investigator · ¥80,000 · Nov 2023 – Jul 2024</div>
+        </div>
+      </div>
+      <div class="grant-item">
+        <div class="grant-mark">III</div>
+        <div>
+          <div class="grant-title">Zhejiang Provincial Postdoctoral Research Project Merit-based Funding</div>
+          <div class="grant-detail">Principal Investigator · ¥50,000 · Sep 2023 – Jun 2024</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PUBLICATIONS ─── -->
+  <section id="publications">
+    <p class="s-label">Research Output</p>
+    <h2 class="s-title">Publications</h2>
+    <div class="s-rule"></div>
+    <div class="pub-list" id="pub-list"></div>
+  </section>
+
+  <!-- ─── ACADEMIC ACTIVITIES ─── -->
+  <section id="talks">
+    <p class="s-label">Presentations</p>
+    <h2 class="s-title">Academic Activities</h2>
+    <div class="s-rule"></div>
+    <div class="talk-list" id="talk-list"></div>
+  </section>
+
+</main>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div>
+    <div class="footer-name">Jihong Wang</div>
+    <div class="footer-meta" style="margin-top:.5rem;">School of Mathematics and Statistics · Huazhong University of Science and Technology</div>
+  </div>
+  <div class="footer-meta" style="text-align:right;">
+    <a href="mailto:jhwang00519@gmail.com">jhwang00519@gmail.com</a><br>
+    Last updated March 2026
+  </div>
+</footer>
+
+<!-- ─── DATA ─── -->
+<script src="data.js"></script>
+
+<!-- ─── RENDER ENGINE ─── -->
+<script>
+  function renderPublications() {
+    const list = document.getElementById('pub-list');
+    if (!list || typeof PUBLICATIONS === 'undefined') return;
+
+    list.innerHTML = PUBLICATIONS.map((p, i) => {
+      const num = String(i + 1).padStart(2, '0');
+      const authorsHtml = p.authors.map(a =>
+        a === SELF_NAME ? `<span class="pub-self">${a}</span>` : a
+      ).join(', ');
+      const doiLink = p.doi
+        ? ` <a href="https://doi.org/${p.doi}" target="_blank" rel="noopener" class="pub-doi">[DOI]</a>`
+        : '';
+      const typeTag = p.type === 'preprint'
+        ? '<span class="tag tag-preprint">Preprint</span>'
+        : p.type === 'conference'
+          ? '<span class="tag tag-conference">Conference</span>'
+          : '<span class="tag tag-journal">Journal</span>';
+
+      return `
+        <div class="pub-item">
+          <div class="pub-index">${num}</div>
+          <div>
+            <div class="pub-title">${p.title}${doiLink}</div>
+            <div class="pub-authors">${authorsHtml}</div>
+            <div class="pub-meta">
+              <span class="pub-venue">${p.venue}</span>
+              ${typeTag}
+              <span class="tag tag-year">${p.year}</span>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+
+    document.querySelectorAll('#pub-count-hero').forEach(el => { el.textContent = PUBLICATIONS.length; });
+  }
+
+  function renderTalks() {
+    const list = document.getElementById('talk-list');
+    if (!list || typeof TALKS === 'undefined') return;
+
+    list.innerHTML = TALKS.map(t => {
+      let typeTag = '';
+      if (t.type === 'invited') typeTag = '<span class="talk-type type-invited">Invited Talk</span>';
+      else if (t.type === 'poster') typeTag = '<span class="talk-type type-poster">Poster</span>';
+      return `
+        <div class="talk-item">
+          <div class="talk-year">${t.year}</div>
+          <div>
+            <div class="talk-conf">${t.conference}</div>
+            <div class="talk-loc">${t.location}</div>
+            ${typeTag}
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  renderPublications();
+  renderTalks();
+</script>
+
+<!-- ─── GOATCOUNTER（访客统计，部署后取消注释并替换站点名）────────
+<script data-goatcounter="https://YOUR-SITE-NAME.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+─────────────────────────────────────────────────────────────── -->
+
+</body>
+</html>
